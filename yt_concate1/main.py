@@ -1,14 +1,50 @@
-import urllib.request
-import json
-from yt_concate1.settings import API_KEY
-print(API_KEY)
+# import urllib.request
+# import json
+# from yt_concate1.settings import API_KEY
+# print(API_KEY)
 
+from yt_concate1.pipeline.steps.get_video_list import GetVideoList
+#from yt_concate1.pipeline.steps.step import StepException
 
+from yt_concate1.pipeline.pipeline import Pipeline
 
 CHANNEL_ID = 'UCAk3t7WHs2zjsZpopox8Taw'
 
+
+def main():
+    inputs = {
+        'channel_id': CHANNEL_ID
+    }
+    steps = [
+        GetVideoList(),
+    ]
+
+    p = Pipeline(steps)
+    p.run(inputs)
+
+
+if __name__ == '__main__':
+    main()
+
+#
+'''make pipeline
+steps = [
+    GetVideoList(),
+]
+
+for step in steps:
+    try:
+        step.process()
+    except StepException as e:
+        print('Exception happened:', e)
+        break
+
+'''
+
+#
+'''
 def get_all_video_in_channel(channel_id):
-    #api_key ='AIzaSyCtCzAowE_0PfvxIr8TqzTH75-eSsfgNkE'
+
 
     base_video_url = 'https://www.youtube.com/watch?v='
     base_search_url = 'https://www.googleapis.com/youtube/v3/search?'
@@ -33,6 +69,7 @@ def get_all_video_in_channel(channel_id):
             break
     return video_links
 
+'''
 
-#video_list = get_all_video_in_channel(CHANNEL_ID)
-#print(len(video_list))
+# video_list = get_all_video_in_channel(CHANNEL_ID)
+# print(len(video_list))
