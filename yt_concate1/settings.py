@@ -4,6 +4,9 @@ load_dotenv()
 
 API_KEY = os.getenv('API_KEY')
 
+DOWNLOADS_DIR="downloads"
+VIDEO_DIR=os.path.join(DOWNLOADS_DIR, 'vdieos')
+CATION_DIR=os.path.join(DOWNLOADS_DIR,'captions')
 
 #2ed way
 #import os

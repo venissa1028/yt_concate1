@@ -6,7 +6,7 @@ from yt_concate1.settings import API_KEY
 
 
 class GetVideoList(Step):
-    def process(self, data, inputs):
+    def process(self, data, inputs,utils):
         channel_id = inputs['channel_id']
 
         # self.get_all_veideo_in_channe(inputs['channel_id'])
@@ -30,9 +30,9 @@ class GetVideoList(Step):
 
             try:
                 next_page_token = resp['nextPageToken']
-                url = first_url + '&pageToken={}'.format(next_page_token)
+                url= first_url + '&pageToken={}'.format(next_page_token)
+
             except KeyError:
                 break
-            print(len(video_links))
-            return video_links
-
+        print(len(video_links))
+        return video_links

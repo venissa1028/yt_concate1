@@ -4,11 +4,18 @@
 # print(API_KEY)
 
 from yt_concate1.pipeline.steps.get_video_list import GetVideoList
-#from yt_concate1.pipeline.steps.step import StepException
+from yt_concate1.pipeline.steps.step import StepException
 
 from yt_concate1.pipeline.pipeline import Pipeline
+from yt_concate1.pipeline.steps.download_caption import DownloadCaption
+from yt_concate1.util import Utils
+from yt_concate1.pipeline.steps.preflight import Preflight
+from yt_concate1.pipeline.steps.postflight import Postflight
 
-CHANNEL_ID = 'UCAk3t7WHs2zjsZpopox8Taw'
+CHANNEL_ID ='UCKSVUHI9rbbkXhvAXK-2uxA'
+#teacher
+
+#CHANNEL_ID = 'UCAk3t7WHs2zjsZpopox8Taw' #me
 
 
 def main():
@@ -16,11 +23,15 @@ def main():
         'channel_id': CHANNEL_ID
     }
     steps = [
+        Preflight(),
         GetVideoList(),
+        DownloadCaption(),
+        Postflight(),
     ]
 
+    utils = Utils()
     p = Pipeline(steps)
-    p.run(inputs)
+    p.run(inputs, utils)
 
 
 if __name__ == '__main__':
